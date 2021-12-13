@@ -27,10 +27,9 @@ namespace VideoWallpaper
 
         private void WallpaperWindow_Load(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(VideoUrl))
+            if (string.IsNullOrWhiteSpace(VideoUrl) || !File.Exists(VideoUrl))
             {
-                if (!SelectVideo())
-                    Close();
+                if (!SelectVideo()) Close();
             }
 
             Top = 0;
