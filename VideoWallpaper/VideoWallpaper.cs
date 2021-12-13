@@ -14,7 +14,7 @@ namespace VideoWallpaper
             try
             {
                 IntPtr hProgman = DllImports.FindWindow("Progman", null);
-                IntPtr sendMsgRes = DllImports.SendMessageTimeout(hProgman, 0x52c, 0, 0, 0, 100, out _);
+                DllImports.SendMessageTimeout(hProgman, 0x52c, 0, 0, 0, 100, out _);
                 DllImports.EnumWindows(EnumWindowsProc_HideWorkerW, 0);
 
                 string videoUrl = null;
