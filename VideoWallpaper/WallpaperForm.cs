@@ -6,13 +6,11 @@ namespace VideoWallpaper
 {
     public partial class WallpaperForm : Form
     {
-        private string _videoUrl;
         public string VideoUrl
         {
-            get { return _videoUrl; }
+            get { return axWindowsMediaPlayer1.URL; }
             set
             {
-                _videoUrl = value;
                 axWindowsMediaPlayer1.URL = value;
                 axWindowsMediaPlayer1.stretchToFit = true;
                 axWindowsMediaPlayer1.settings.mute = true;
@@ -55,6 +53,11 @@ namespace VideoWallpaper
                 return true;
             }
             return false;
+        }
+
+        public void Reload()
+        {
+            VideoUrl = VideoUrl;
         }
 
         private void NotifyIcon1_MouseClick(object sender, MouseEventArgs e)

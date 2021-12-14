@@ -42,8 +42,7 @@ namespace VideoWallpaper
 
                 SystemEvents.SessionSwitch += (s, e) =>
                 {
-                    if (e.Reason == SessionSwitchReason.SessionUnlock)
-                        wf.VideoUrl = wf.VideoUrl;
+                    if (e.Reason == SessionSwitchReason.SessionUnlock) wf.Reload();
                 };
 
                 wf.FormClosing += (s, e) => DllImports.ShowWindow(hWorkerW, 0);
