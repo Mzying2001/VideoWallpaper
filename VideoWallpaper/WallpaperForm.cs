@@ -6,6 +6,9 @@ namespace VideoWallpaper
 {
     public partial class WallpaperForm : Form
     {
+        private static readonly string AutoStartUpLnkPath
+            = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Startup), "VideoWallpaperAutoStartUp.lnk");
+
         public string VideoUrl
         {
             get { return axWindowsMediaPlayer1.URL; }
@@ -14,6 +17,27 @@ namespace VideoWallpaper
                 axWindowsMediaPlayer1.URL = value;
                 axWindowsMediaPlayer1.stretchToFit = true;
                 axWindowsMediaPlayer1.settings.mute = true;
+            }
+        }
+
+        public bool AutoStartUp
+        {
+            get { return File.Exists(AutoStartUpLnkPath); }
+            set
+            {
+                if (value)
+                {
+                    var shell = new IWshRuntimeLibrary.WshShell();
+                    var shortcut = (IWshRuntimeLibrary.WshShortcut)shell.CreateShortcut(AutoStartUpLnkPath);
+                    shortcut.TargetPath = Application.ExecutablePath;
+                    shortcut.WorkingDirectory = Environment.CurrentDirectory;
+                    shortcut.Save();
+                }
+                else
+                {
+                    if (File.Exists(AutoStartUpLnkPath))
+                        File.Delete(AutoStartUpLnkPath);
+                }
             }
         }
 
@@ -38,6 +62,8 @@ namespace VideoWallpaper
 
             axWindowsMediaPlayer1.uiMode = "none";
             axWindowsMediaPlayer1.settings.setMode("loop", true);
+
+            MenuItem_AutoStartUp.Checked = AutoStartUp;
         }
 
         private bool SelectVideo()
@@ -67,6 +93,12 @@ namespace VideoWallpaper
         private void NotifyIcon1_MouseClick(object sender, MouseEventArgs e)
         {
             contextMenuStrip1.Show(MousePosition.X, MousePosition.Y);
+        }
+
+        private void MenuItem_AutoStartUp_Click(object sender, EventArgs e)
+        {
+            AutoStartUp = !AutoStartUp;
+            MenuItem_AutoStartUp.Checked = AutoStartUp;
         }
 
         private void MenuItem_ChangeVideo_Click(object sender, EventArgs e)
