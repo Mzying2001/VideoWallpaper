@@ -57,7 +57,11 @@ namespace VideoWallpaper
 
         public void Reload()
         {
-            VideoUrl = VideoUrl;
+            Invoke(new Action(() =>
+            {
+                VideoUrl = VideoUrl;
+                axWindowsMediaPlayer1.Ctlcontrols.play();
+            }));
         }
 
         private void NotifyIcon1_MouseClick(object sender, MouseEventArgs e)

@@ -3,6 +3,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace VideoWallpaper
@@ -42,11 +43,22 @@ namespace VideoWallpaper
 
                 SystemEvents.SessionSwitch += (s, e) =>
                 {
+                    //防止屏幕解锁后花屏
                     if (e.Reason == SessionSwitchReason.SessionUnlock) wf.Reload();
                 };
 
+                PowerStatusMonitor psm = new PowerStatusMonitor((context, type, setting) =>
+                {
+                    //防止系统睡眠到唤醒时黑屏
+                    if (type == PowerStatusMonitor.PBT_APMRESUMESUSPEND)
+                        wf.Reload();
+                    return 0;
+                });
+                psm.Register();
+
                 wf.FormClosing += (s, e) => DllImports.ShowWindow(hWorkerW, 0);
                 wf.ShowDialog();
+                psm.UnRegister();
             }
             catch (Exception ex)
             {

@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DllImports.cs" />
+    <Compile Include="PowerStatusMonitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VideoWallpaper.cs" />
     <Compile Include="WallpaperForm.cs">
