@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace VideoWallpaper
@@ -13,6 +15,9 @@ namespace VideoWallpaper
         {
             try
             {
+                if (CheckStarted())
+                    throw new Exception("程序已启动");
+
                 IntPtr hProgman = DllImports.FindWindow("Progman", null);
                 DllImports.SendMessageTimeout(hProgman, 0x52c, 0, 0, 0, 100, out _);
 
@@ -41,6 +46,12 @@ namespace VideoWallpaper
             {
                 MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private static bool CheckStarted()
+        {
+            Process cur = Process.GetCurrentProcess();
+            return (from p in Process.GetProcesses() where p.ProcessName == cur.ProcessName && p.Id != cur.Id select p).Any();
         }
     }
 }
