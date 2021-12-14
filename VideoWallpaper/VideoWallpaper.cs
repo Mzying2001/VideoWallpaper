@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -38,6 +39,12 @@ namespace VideoWallpaper
 
                 WallpaperForm wf = new WallpaperForm { VideoUrl = videoUrl };
                 DllImports.SetParent(wf.Handle, hWorkerW);
+
+                SystemEvents.SessionSwitch += (s, e) =>
+                {
+                    if (e.Reason == SessionSwitchReason.SessionUnlock)
+                        wf.VideoUrl = wf.VideoUrl;
+                };
 
                 wf.FormClosing += (s, e) => DllImports.ShowWindow(hWorkerW, 0);
                 wf.ShowDialog();
