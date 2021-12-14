@@ -14,6 +14,7 @@ namespace VideoWallpaper
             {
                 _videoUrl = value;
                 axWindowsMediaPlayer1.URL = value;
+                axWindowsMediaPlayer1.stretchToFit = true;
                 axWindowsMediaPlayer1.settings.mute = true;
             }
         }
