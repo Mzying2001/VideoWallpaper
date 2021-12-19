@@ -5,9 +5,10 @@ namespace VideoWallpaper
 {
     public class PowerStatusMonitor
     {
-        public IntPtr registrationHandle;
-        public DEVICE_NOTIFY_SUBSCRIBE_PARAMETERS recipient;
-        public IntPtr pRecipient;
+        private IntPtr registrationHandle;
+        private DEVICE_NOTIFY_SUBSCRIBE_PARAMETERS recipient;
+        private IntPtr pRecipient;
+
         public DeviceNotifyCallbackRoutine callback;
 
         public PowerStatusMonitor(DeviceNotifyCallbackRoutine callback)
@@ -33,12 +34,9 @@ namespace VideoWallpaper
 
         public bool UnRegister()
         {
-            return PowerUnregisterSuspendResumeNotification(ref registrationHandle) != 0;
-        }
-
-        ~PowerStatusMonitor()
-        {
+            uint result = PowerUnregisterSuspendResumeNotification(ref registrationHandle);
             Marshal.FreeHGlobal(pRecipient);
+            return result != 0;
         }
 
 
