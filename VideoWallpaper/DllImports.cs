@@ -4,8 +4,6 @@ using System.Text;
 
 namespace VideoWallpaper
 {
-    public delegate bool EnumWindowsProc(IntPtr hwnd, IntPtr lParam);
-
     public static class DllImports
     {
         [DllImport("user32.dll")]
@@ -19,6 +17,7 @@ namespace VideoWallpaper
 
         [DllImport("user32.dll")]
         public static extern int EnumWindows(EnumWindowsProc ewp, int lParam);
+        public delegate bool EnumWindowsProc(IntPtr hwnd, IntPtr lParam);
 
         [DllImport("user32.dll")]
         public static extern bool ShowWindow(IntPtr hWnd, uint nCmdShow);
