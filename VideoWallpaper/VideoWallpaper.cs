@@ -55,9 +55,13 @@ namespace VideoWallpaper
                 });
                 psm.Register();
 
-                wf.FormClosing += (s, e) => DllImports.ShowWindow(hWorkerW, 0);
-                wf.ShowDialog();
-                psm.UnRegister();
+                wf.FormClosed += (s, e) =>
+                {
+                    DllImports.ShowWindow(hWorkerW, 0);
+                    psm.UnRegister();
+                };
+
+                Application.Run(wf);
             }
             catch (Exception ex)
             {
