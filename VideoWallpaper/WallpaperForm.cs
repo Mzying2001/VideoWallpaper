@@ -113,7 +113,7 @@ namespace VideoWallpaper
 
         private void MenuItem_CloseWindow_Click(object sender, EventArgs e)
         {
-            Close();
+            Application.Exit();
         }
     }
 }
