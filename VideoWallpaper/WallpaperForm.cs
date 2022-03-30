@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace VideoWallpaper
@@ -92,7 +93,11 @@ namespace VideoWallpaper
 
         private void NotifyIcon1_MouseClick(object sender, MouseEventArgs e)
         {
-            contextMenuStrip1.Show(MousePosition.X, MousePosition.Y);
+            if (e.Button == MouseButtons.Left)
+            {
+                var t = notifyIcon1.GetType();
+                t.GetMethod("ShowContextMenu", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(notifyIcon1, null);
+            }
         }
 
         private void MenuItem_AutoStartUp_Click(object sender, EventArgs e)
@@ -109,11 +114,6 @@ namespace VideoWallpaper
         private void MenuItem_CloseWindow_Click(object sender, EventArgs e)
         {
             Close();
-        }
-
-        private void MenuItem_CloseMenu_Click(object sender, EventArgs e)
-        {
-            contextMenuStrip1.Visible = false;
         }
     }
 }
