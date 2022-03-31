@@ -53,7 +53,11 @@ namespace VideoWallpaper
         {
             if (string.IsNullOrWhiteSpace(VideoUrl) || !File.Exists(VideoUrl))
             {
-                if (!SelectVideo()) Close();
+                if (!SelectVideo())
+                {
+                    Application.Exit();
+                    return;
+                }
             }
 
             Top = 0;
