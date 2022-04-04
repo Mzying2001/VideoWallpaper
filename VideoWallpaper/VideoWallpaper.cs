@@ -1,8 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,22 +11,27 @@ namespace VideoWallpaper
     {
         public const string VIDEO_TXT = "./video.txt"; //记录视频路径的文件
 
-        private const string ARG_ONRESTART = "-onRestart"; //重启程序时添加此参数以取消对多开的检测
-
         private static bool restart = false; //是否要重启程序
 
+        private static Mutex mutex; //用于检测程序是否已运行
+
         [STAThread]
-        public static void Main(string[] args)
+        public static void Main()
         {
+            IntPtr hProgman = IntPtr.Zero;
+            IntPtr hWorkerW = IntPtr.Zero;
             try
             {
-                if (!args.Contains(ARG_ONRESTART) && CheckStarted())
+                mutex = new Mutex(true, Application.ProductName, out bool flag);
+                if (!flag)
+                {
                     throw new Exception("程序已启动");
+                }
 
-                IntPtr hProgman = DllImports.FindWindow("Progman", null);
+                hProgman = DllImports.FindWindow("Progman", null);
                 DllImports.SendMessageTimeout(hProgman, 0x52c, 0, 0, 0, 100, out _);
 
-                IntPtr hWorkerW = IntPtr.Zero;
+                hWorkerW = IntPtr.Zero;
                 DllImports.EnumWindows((hwnd, lParam) =>
                 {
                     IntPtr hDefView = DllImports.FindWindowEx(hwnd, IntPtr.Zero, "SHELLDLL_DefView", null);
@@ -68,27 +71,22 @@ namespace VideoWallpaper
 
                 Application.Run(wf);
 
+                DllImports.ShowWindow(hWorkerW, 0);
                 psm.UnRegister();
                 cts.Cancel();
-                if (restart)
-                {
-                    Process.Start(Application.ExecutablePath, ARG_ONRESTART);
-                }
-                else
-                {
-                    DllImports.ShowWindow(hWorkerW, 0);
-                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private static bool CheckStarted()
-        {
-            Process cur = Process.GetCurrentProcess();
-            return (from p in Process.GetProcesses() where p.ProcessName == cur.ProcessName && p.Id != cur.Id select p).Any();
+            finally
+            {
+                mutex.Dispose();
+                if (restart)
+                {
+                    Application.Restart();
+                }
+            }
         }
 
         private static string GetSavedVideoUrl()
