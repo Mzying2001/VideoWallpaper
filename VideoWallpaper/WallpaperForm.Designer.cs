@@ -58,31 +58,32 @@
             this.MenuItem_AutoStartUp,
             this.MenuItem_CloseWindow});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(139, 82);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(211, 110);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.ContextMenuStrip1_Opening);
             // 
             // MenuItem_ChangeVideo
             // 
             this.MenuItem_ChangeVideo.Name = "MenuItem_ChangeVideo";
-            this.MenuItem_ChangeVideo.Size = new System.Drawing.Size(138, 24);
+            this.MenuItem_ChangeVideo.Size = new System.Drawing.Size(210, 24);
             this.MenuItem_ChangeVideo.Text = "更换视频";
             this.MenuItem_ChangeVideo.Click += new System.EventHandler(this.MenuItem_ChangeVideo_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(135, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(207, 6);
             // 
             // MenuItem_AutoStartUp
             // 
             this.MenuItem_AutoStartUp.Name = "MenuItem_AutoStartUp";
-            this.MenuItem_AutoStartUp.Size = new System.Drawing.Size(138, 24);
+            this.MenuItem_AutoStartUp.Size = new System.Drawing.Size(210, 24);
             this.MenuItem_AutoStartUp.Text = "开机自启";
             this.MenuItem_AutoStartUp.Click += new System.EventHandler(this.MenuItem_AutoStartUp_Click);
             // 
             // MenuItem_CloseWindow
             // 
             this.MenuItem_CloseWindow.Name = "MenuItem_CloseWindow";
-            this.MenuItem_CloseWindow.Size = new System.Drawing.Size(138, 24);
+            this.MenuItem_CloseWindow.Size = new System.Drawing.Size(210, 24);
             this.MenuItem_CloseWindow.Text = "退出程序";
             this.MenuItem_CloseWindow.Click += new System.EventHandler(this.MenuItem_CloseWindow_Click);
             // 

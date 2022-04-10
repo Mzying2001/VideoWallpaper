@@ -67,8 +67,6 @@ namespace VideoWallpaper
 
             axWindowsMediaPlayer1.uiMode = "none";
             axWindowsMediaPlayer1.settings.setMode("loop", true);
-
-            MenuItem_AutoStartUp.Checked = AutoStartUp;
         }
 
         private bool SelectVideo()
@@ -104,10 +102,14 @@ namespace VideoWallpaper
             }
         }
 
+        private void ContextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MenuItem_AutoStartUp.Checked = AutoStartUp;
+        }
+
         private void MenuItem_AutoStartUp_Click(object sender, EventArgs e)
         {
             AutoStartUp = !AutoStartUp;
-            MenuItem_AutoStartUp.Checked = AutoStartUp;
         }
 
         private void MenuItem_ChangeVideo_Click(object sender, EventArgs e)
