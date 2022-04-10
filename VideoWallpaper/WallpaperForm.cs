@@ -31,6 +31,7 @@ namespace VideoWallpaper
                     var shell = new IWshRuntimeLibrary.WshShell();
                     var shortcut = (IWshRuntimeLibrary.WshShortcut)shell.CreateShortcut(AutoStartUpLnkPath);
                     shortcut.TargetPath = Application.ExecutablePath;
+                    shortcut.Description = "VideoWallpaper开机启动";
                     shortcut.WorkingDirectory = Environment.CurrentDirectory;
                     shortcut.Save();
                 }
