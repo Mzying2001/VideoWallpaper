@@ -30,97 +30,97 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WallpaperForm));
-            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.MenuItem_ChangeVideo = new System.Windows.Forms.ToolStripMenuItem();
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.notifyIconContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItem_ChangeVideo = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.MenuItem_AutoStartUp = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuItem_CloseWindow = new System.Windows.Forms.ToolStripMenuItem();
-            this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
-            this.contextMenuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
+            this.menuItem_AutoStartUp = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItem_CloseWindow = new System.Windows.Forms.ToolStripMenuItem();
+            this.mediaPlayer = new AxWMPLib.AxWindowsMediaPlayer();
+            this.notifyIconContextMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mediaPlayer)).BeginInit();
             this.SuspendLayout();
             // 
-            // notifyIcon1
+            // notifyIcon
             // 
-            this.notifyIcon1.ContextMenuStrip = this.contextMenuStrip1;
-            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
-            this.notifyIcon1.Text = "VideoWallpaper";
-            this.notifyIcon1.Visible = true;
-            this.notifyIcon1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NotifyIcon1_MouseClick);
+            this.notifyIcon.ContextMenuStrip = this.notifyIconContextMenu;
+            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
+            this.notifyIcon.Text = "VideoWallpaper";
+            this.notifyIcon.Visible = true;
+            this.notifyIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NotifyIcon_MouseClick);
             // 
-            // contextMenuStrip1
+            // notifyIconContextMenu
             // 
-            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MenuItem_ChangeVideo,
+            this.notifyIconContextMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.notifyIconContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItem_ChangeVideo,
             this.toolStripSeparator1,
-            this.MenuItem_AutoStartUp,
-            this.MenuItem_CloseWindow});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(211, 110);
-            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.ContextMenuStrip1_Opening);
+            this.menuItem_AutoStartUp,
+            this.menuItem_CloseWindow});
+            this.notifyIconContextMenu.Name = "contextMenuStrip1";
+            this.notifyIconContextMenu.Size = new System.Drawing.Size(139, 82);
+            this.notifyIconContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.NotifyIconContextMenu_Opening);
             // 
-            // MenuItem_ChangeVideo
+            // menuItem_ChangeVideo
             // 
-            this.MenuItem_ChangeVideo.Name = "MenuItem_ChangeVideo";
-            this.MenuItem_ChangeVideo.Size = new System.Drawing.Size(210, 24);
-            this.MenuItem_ChangeVideo.Text = "更换视频";
-            this.MenuItem_ChangeVideo.Click += new System.EventHandler(this.MenuItem_ChangeVideo_Click);
+            this.menuItem_ChangeVideo.Name = "menuItem_ChangeVideo";
+            this.menuItem_ChangeVideo.Size = new System.Drawing.Size(138, 24);
+            this.menuItem_ChangeVideo.Text = "更换视频";
+            this.menuItem_ChangeVideo.Click += new System.EventHandler(this.MenuItem_ChangeVideo_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(207, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(135, 6);
             // 
-            // MenuItem_AutoStartUp
+            // menuItem_AutoStartUp
             // 
-            this.MenuItem_AutoStartUp.Name = "MenuItem_AutoStartUp";
-            this.MenuItem_AutoStartUp.Size = new System.Drawing.Size(210, 24);
-            this.MenuItem_AutoStartUp.Text = "开机自启";
-            this.MenuItem_AutoStartUp.Click += new System.EventHandler(this.MenuItem_AutoStartUp_Click);
+            this.menuItem_AutoStartUp.Name = "menuItem_AutoStartUp";
+            this.menuItem_AutoStartUp.Size = new System.Drawing.Size(138, 24);
+            this.menuItem_AutoStartUp.Text = "开机自启";
+            this.menuItem_AutoStartUp.Click += new System.EventHandler(this.MenuItem_AutoStartUp_Click);
             // 
-            // MenuItem_CloseWindow
+            // menuItem_CloseWindow
             // 
-            this.MenuItem_CloseWindow.Name = "MenuItem_CloseWindow";
-            this.MenuItem_CloseWindow.Size = new System.Drawing.Size(210, 24);
-            this.MenuItem_CloseWindow.Text = "退出程序";
-            this.MenuItem_CloseWindow.Click += new System.EventHandler(this.MenuItem_CloseWindow_Click);
+            this.menuItem_CloseWindow.Name = "menuItem_CloseWindow";
+            this.menuItem_CloseWindow.Size = new System.Drawing.Size(138, 24);
+            this.menuItem_CloseWindow.Text = "退出程序";
+            this.menuItem_CloseWindow.Click += new System.EventHandler(this.MenuItem_CloseWindow_Click);
             // 
-            // axWindowsMediaPlayer1
+            // mediaPlayer
             // 
-            this.axWindowsMediaPlayer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.axWindowsMediaPlayer1.Enabled = true;
-            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(0, 0);
-            this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
-            this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
-            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(500, 300);
-            this.axWindowsMediaPlayer1.TabIndex = 0;
+            this.mediaPlayer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mediaPlayer.Enabled = true;
+            this.mediaPlayer.Location = new System.Drawing.Point(0, 0);
+            this.mediaPlayer.Name = "mediaPlayer";
+            this.mediaPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("mediaPlayer.OcxState")));
+            this.mediaPlayer.Size = new System.Drawing.Size(500, 300);
+            this.mediaPlayer.TabIndex = 0;
             // 
             // WallpaperForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(500, 300);
-            this.Controls.Add(this.axWindowsMediaPlayer1);
+            this.Controls.Add(this.mediaPlayer);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "WallpaperForm";
             this.Text = "WallpaperWindow";
             this.Load += new System.EventHandler(this.WallpaperWindow_Load);
-            this.contextMenuStrip1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).EndInit();
+            this.notifyIconContextMenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.mediaPlayer)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
-        private System.Windows.Forms.NotifyIcon notifyIcon1;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem MenuItem_CloseWindow;
-        private System.Windows.Forms.ToolStripMenuItem MenuItem_ChangeVideo;
-        private System.Windows.Forms.ToolStripMenuItem MenuItem_AutoStartUp;
+        private AxWMPLib.AxWindowsMediaPlayer mediaPlayer;
+        private System.Windows.Forms.NotifyIcon notifyIcon;
+        private System.Windows.Forms.ContextMenuStrip notifyIconContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem menuItem_CloseWindow;
+        private System.Windows.Forms.ToolStripMenuItem menuItem_ChangeVideo;
+        private System.Windows.Forms.ToolStripMenuItem menuItem_AutoStartUp;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }

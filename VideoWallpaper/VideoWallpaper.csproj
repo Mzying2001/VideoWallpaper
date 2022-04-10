@@ -80,6 +80,7 @@
   <ItemGroup>
     <EmbeddedResource Include="WallpaperForm.resx">
       <DependentUpon>WallpaperForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

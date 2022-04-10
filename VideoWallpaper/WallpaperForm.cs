@@ -12,12 +12,12 @@ namespace VideoWallpaper
 
         public string VideoUrl
         {
-            get { return axWindowsMediaPlayer1.URL; }
+            get { return mediaPlayer.URL; }
             set
             {
-                axWindowsMediaPlayer1.URL = value;
-                axWindowsMediaPlayer1.stretchToFit = true;
-                axWindowsMediaPlayer1.settings.mute = true;
+                mediaPlayer.URL = value;
+                mediaPlayer.stretchToFit = true;
+                mediaPlayer.settings.mute = true;
             }
         }
 
@@ -65,8 +65,8 @@ namespace VideoWallpaper
             Width = Screen.PrimaryScreen.Bounds.Width;
             Height = Screen.PrimaryScreen.Bounds.Height;
 
-            axWindowsMediaPlayer1.uiMode = "none";
-            axWindowsMediaPlayer1.settings.setMode("loop", true);
+            mediaPlayer.uiMode = "none";
+            mediaPlayer.settings.setMode("loop", true);
         }
 
         private bool SelectVideo()
@@ -89,22 +89,22 @@ namespace VideoWallpaper
             Invoke(new Action(() =>
             {
                 VideoUrl = VideoUrl;
-                axWindowsMediaPlayer1.Ctlcontrols.play();
+                mediaPlayer.Ctlcontrols.play();
             }));
         }
 
-        private void NotifyIcon1_MouseClick(object sender, MouseEventArgs e)
+        private void NotifyIcon_MouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
-                var t = notifyIcon1.GetType();
-                t.GetMethod("ShowContextMenu", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(notifyIcon1, null);
+                var t = notifyIcon.GetType();
+                t.GetMethod("ShowContextMenu", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(notifyIcon, null);
             }
         }
 
-        private void ContextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        private void NotifyIconContextMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            MenuItem_AutoStartUp.Checked = AutoStartUp;
+            menuItem_AutoStartUp.Checked = AutoStartUp;
         }
 
         private void MenuItem_AutoStartUp_Click(object sender, EventArgs e)
