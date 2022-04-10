@@ -9,11 +9,42 @@ namespace VideoWallpaper
 {
     public class VideoWallpaper
     {
-        public const string VIDEO_TXT = "./video.txt"; //记录视频路径的文件
+        private const string VIDEO_TXT = "./video.txt"; //记录视频路径的文件
 
         private static bool restart = false; //是否要重启程序
 
         private static Mutex mutex; //用于检测程序是否已运行
+
+        /// <summary>
+        /// 开机自启快捷方式路径
+        /// </summary>
+        private static readonly string AutoStartUpLnkPath
+            = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Startup), "VideoWallpaperAutoStartUp.lnk");
+
+        /// <summary>
+        /// 开机自启
+        /// </summary>
+        public static bool AutoStartUp
+        {
+            get { return File.Exists(AutoStartUpLnkPath); }
+            set
+            {
+                if (value)
+                {
+                    var shell = new IWshRuntimeLibrary.WshShell();
+                    var shortcut = (IWshRuntimeLibrary.WshShortcut)shell.CreateShortcut(AutoStartUpLnkPath);
+                    shortcut.TargetPath = Application.ExecutablePath;
+                    shortcut.Description = "VideoWallpaper开机启动";
+                    shortcut.WorkingDirectory = Environment.CurrentDirectory;
+                    shortcut.Save();
+                }
+                else
+                {
+                    if (File.Exists(AutoStartUpLnkPath))
+                        File.Delete(AutoStartUpLnkPath);
+                }
+            }
+        }
 
         [STAThread]
         public static void Main()
@@ -47,7 +78,7 @@ namespace VideoWallpaper
                     }
                 }, 0);
 
-                WallpaperForm wf = new WallpaperForm { VideoUrl = GetSavedVideoUrl() };
+                WallpaperForm wf = new WallpaperForm();
                 DllImports.SetParent(wf.Handle, hWorkerW);
 
                 SystemEvents.SessionSwitch += (s, e) =>
@@ -89,7 +120,12 @@ namespace VideoWallpaper
             }
         }
 
-        private static string GetSavedVideoUrl()
+        public static void SaveVideoUrl(string videoUrl)
+        {
+            File.WriteAllText(VIDEO_TXT, videoUrl);
+        }
+
+        public static string GetSavedVideoUrl()
         {
             return File.Exists(VIDEO_TXT) ? File.ReadAllText(VIDEO_TXT) : null;
         }
