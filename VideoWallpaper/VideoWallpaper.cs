@@ -136,23 +136,20 @@ namespace VideoWallpaper
             // 1、循环检测hProgman是否发生变化
             // 2、当检测到hProgman变化时重启程序
 
-            await Task.Run(async () =>
+            while (!cts.IsCancellationRequested)
             {
-                while (!cts.IsCancellationRequested)
+                IntPtr hProgmanCurrent = DllImports.FindWindow("Progman", null);
+                if (hProgmanCurrent != IntPtr.Zero && hProgmanCurrent != hProgman)
                 {
-                    IntPtr hProgmanCurrent = DllImports.FindWindow("Progman", null);
-                    if (hProgmanCurrent != IntPtr.Zero && hProgmanCurrent != hProgman)
-                    {
-                        restart = true;
-                        Application.Exit();
-                        break;
-                    }
-                    else
-                    {
-                        await Task.Delay(200);
-                    }
+                    restart = true;
+                    Application.Exit();
+                    break;
                 }
-            }, cts.Token);
+                else
+                {
+                    await Task.Delay(500);
+                }
+            }
         }
     }
 }
